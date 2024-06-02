@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from pick_favor_locations import NaiveLocationPicker
 
 app = Flask(__name__)
 
@@ -14,9 +15,10 @@ def process_coordinates():
         return jsonify({"error": "missing latitude and longitude information"}), 400
     
     input_coord = (data['latitude'], data['longitude'])
+    location_picker = NaiveLocationPicker()
+    rec_locations = location_picker.recommand_location(input_coord)
 
-
-    # return jsonify(closest_locations)
+    return jsonify(rec_locations)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
