@@ -1,4 +1,3 @@
-from geopy.distance import geodesic
 import sys
 import math
 
@@ -47,8 +46,7 @@ class NaiveLocationPicker:
             closest_location = None
             
             for location in remaining_locations:
-                # distance = haversine_distance(location, current_coord)
-                distance = geodesic(location, current_coord).km
+                distance = haversine_distance(location, current_coord)
                 if distance < closest_distance:
                     # print(distance)
                     closest_distance = distance
@@ -73,7 +71,7 @@ class PopLocationPicker:
 
         for _ in range(favor_num):
             for loc in tmp_locations:
-                distance = geodesic(cur_loc, loc).km
+                distance = haversine_distance(cur_loc, loc)
                 if distance < MAX_FLOAT:
                     rec_location = loc
             
@@ -95,7 +93,7 @@ class TimeLocationPicker:
 
         for _ in range(favor_num):
             for loc in beijing_locations:
-                distance = geodesic(cur_loc, loc).km
+                distance = haversine_distance(cur_loc, loc)
                 if distance < MAX_FLOAT:
                     rec_location = loc
             rec_locations.append(rec_location)
@@ -114,7 +112,7 @@ class AILocationPicker:
 
         for _ in range(favor_num):
             for loc in beijing_locations:
-                distance = geodesic(cur_loc, loc).km
+                distance = haversine_distance(cur_loc, loc)
                 if distance < MAX_FLOAT:
                     rec_location = loc
             rec_locations.append(rec_location)
