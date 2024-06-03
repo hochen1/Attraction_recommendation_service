@@ -47,7 +47,8 @@ class NaiveLocationPicker:
             closest_location = None
             
             for location in remaining_locations:
-                distance = haversine_distance(location, current_coord)
+                # distance = haversine_distance(location, current_coord)
+                distance = geodesic(location, current_coord).km
                 if distance < closest_distance:
                     # print(distance)
                     closest_distance = distance
